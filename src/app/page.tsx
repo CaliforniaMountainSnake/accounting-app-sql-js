@@ -10,8 +10,7 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       const SQL = await initSqlJs({
-        // locateFile: (file) => `https://sql.js.org/dist/${file}`,
-        locateFile: () => `/sql-wasm.wasm`,
+        locateFile: (file) => `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/${file}`,
       });
 
       const db: Database = new SQL.Database();
