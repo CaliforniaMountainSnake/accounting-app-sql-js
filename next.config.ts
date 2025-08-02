@@ -6,7 +6,10 @@ const nextConfig: NextConfig = {
     console.log(`Webpack version: ${webpack.version}`);
 
     if (!isServer) {
-      config.resolve.fallback.fs = false;
+      config.resolve.fallback = {
+        ...(config.resolve.fallback || {}),
+        fs: false,
+      };
     }
 
     return config;
@@ -14,3 +17,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
