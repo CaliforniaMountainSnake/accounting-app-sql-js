@@ -1,5 +1,5 @@
 "use client";
-
+import { Container, Spinner, Table, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import initSqlJs, { Database, SqlValue } from "sql.js";
 
@@ -27,27 +27,35 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Users from SQLite (sql.js)</h1>
-      {!ready && <p>Loading...</p>}
-      {ready && (
-        <table className="border border-collapse">
-          <thead>
-            <tr>
-              <th className="border px-2">ID</th>
-              <th className="border px-2">Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map(([id, name]) => (
-              <tr key={Number(id)}>
-                <td className="border px-2">{id}</td>
-                <td className="border px-2">{name}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <Container fluid>
+      {!ready && (
+        <VStack>
+          <Spinner />
+          <Text>Loading...</Text>
+        </VStack>
       )}
-    </main>
+      {ready && (
+        <Table.Root variant="outline" size="lg">
+          <Table.Caption captionSide="top">Users from SQLite (sql.js)</Table.Caption>
+          <Table.Header>
+            <Table.Row>
+              <Table.ColumnHeader>ID</Table.ColumnHeader>
+              <Table.ColumnHeader>Name</Table.ColumnHeader>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {rows.map(([id, name]) => (
+              <Table.Row key={Number(id)}>
+                <Table.Cell>{id}</Table.Cell>
+                <Table.Cell>{name}</Table.Cell>
+              </Table.Row>
+            ))}
+            <Table.Row>
+              <Table.Cell />
+            </Table.Row>
+          </Table.Body>
+        </Table.Root>
+      )}
+    </Container>
   );
 }
