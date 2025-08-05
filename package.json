@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": "next lint"
   },
   "dependencies": {
     "@chakra-ui/react": "^3.24.0",
@@ -26,6 +30,8 @@
     "@types/sql.js": "^1.4.9",
     "eslint": "^9",
     "eslint-config-next": "15.4.4",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.4",
     "typescript": "^5"
   }
 }
